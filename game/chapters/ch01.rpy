@@ -133,18 +133,12 @@ label kabinet_103:
 
     scene bg 103_view # 30
 
-    # pause
-    # scene bg door_103 # 31
-    # pause
-    # scene bg inside_103_1 # 32
+    pause
 
-
-
-    scene bg inside_103 with fade
+    scene bg dialog_103 with fade
 
     pause
 
-    scene bg dialog_103 # 33
     show kirill_smile
 
     gg "[dialogs['chapter_1']['kabinet_103']['greeting']['text']]"
@@ -234,9 +228,8 @@ label kabinet_103:
 label kabinet_115:
     scene bg 115_view with fade
     pause
-    scene bg inside_115 with fade
+    scene bg dialog_115 with fade
     pause
-    scene bg dialog_115
     show sotrudnic_115
     sotrudnic_115 "Добрый день! У вас есть какие-нибудь дипломы, сертификаты и прочее за последние 2 года?"
     sotrudnic_115 "Давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
@@ -263,7 +256,13 @@ label kabinet_115:
     sotrudnic_115 "Следите за списками на сайте колледжа. Будем рады Вас видеть, удачи в поступлении!"
     gg "Спасибо, до свидания!"
     
-    scene bg goodbye_kip
+    scene bg 115_view
+    pause
+    scene bg turnikety with fade
+    pause
+    scene bg kipvhod
+    pause
+    scene bg window_1 with fade
     pause
     scene bg notebook_goooool
     show laptop_2
