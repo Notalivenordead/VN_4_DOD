@@ -1,4 +1,44 @@
 # chapters/ch01.rpy
+init:
+    screen faq(adj): #Завтрашний я, знвй что ты долбаеб, который забил на оптимизацию и обещал ее сделать потот
+        frame:
+            xsize 1640
+            xalign .5
+            ysize 1085
+            ypos 100
+
+            has side "c r b"
+
+            viewport:
+                yadjustment adj
+                mousewheel True
+                draggable True
+
+                vbox:
+                    $ faq_questions = [
+                        ("А вот вы, как студент данного колледжа, можете рассказать, каково здесь обучаться?", "FAQ1"),
+                        ("А в столовой вкусно кормят?", "FAQ2"),
+                        ("Как обучают преподаватели? Понятно ли? Много ли к ним претензий?", "FAQ3"),
+                        ("А во сколько начинаются и заканчиваются пары?", "FAQ4"),
+                        ("Нужно ли писать вступительные?", "FAQ5"),
+                        ("Как получить справку для школы о поступлении?", "FAQ7"),
+                        ("Кому нужно будет сдать справку 086у?", "FAQ8"),
+                        ("Будет ли отсрочка от армии?", "FAQ9"),
+                        ("А кампусные карты у вас есть же? Я в группе в ВК видел. У меня такая будет?", "FAQ10"),
+                        ("А тут также как и в школе будет куча учебников? Если да, то когда и где их забирать?", "FAQ11")
+                    ]
+
+                    for question, label in faq_questions:
+                        textbutton question:
+                            action Jump(label)
+                            xfill True
+                            
+            bar adjustment adj style "vscrollbar"
+
+            textbutton _("На этом пока все"):
+                xfill True
+                action Jump("specialnosty")
+                top_margin 10
 
 label chapter_01:
     
