@@ -169,33 +169,59 @@ label kabinet_103:
         notes["education_data_filling"].title,
         notes["education_data_filling"].text
     )
+    jump FAQ
 
-    roditel "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['food']['text']]"
-    sotrudnic_103 "В столовой всегда можно найти разнообразные и вкусные блюда."
+label FAQ:
+    call screen faq(adj=ui.adjustment())
+    jump specialnosty
 
-    gg "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['teachers']['text']]"
-    sotrudnic_103 "Преподаватели отличные. Они знают свой предмет и умеют интересно его подавать."
 
-    gg "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['schedule']['text']]"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['additional_dialogs']['schedule_details']['text']]"
+label FAQ1:
+    roditel "А вот вы, как студент данного колледжа, можете рассказать, каково здесь обучаться?"
+    sotrudnic_103 "Хм… Обучение в Колледже Информатики и Программирования очень увлекательное, к тому же здесь я встретил много приятных и интересных людей."
+    sotrudnic_103 "Мне все очень нравится, особенно возможность реализовывать свои проекты и применять знания на практике."
+    jump start
 
-    gg "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['entrance_tests']['text']]"
+label FAQ2:
+    gg "А в столовой вкусно кормят?"
+    sotrudnic_103 "В  столовой всегда можно найти разнообразные и вкусные блюда, у нас есть комплексный обед, также меню меняется в зависимости от дня недели. Я и мои друзья всегда находим что-то по душе."
+    sotrudnic_103 "Еще перекусить можно в кофейне около столовой или в ближайших магазинах."
+    jump FAQ
+label FAQ3:
+    roditel "Как обучают преподаватели? Понятно ли? Много ли к ним претензий?"
+    sotrudnic_103 "Преподаватели отличные. Они знают свой предмет и при этом умеют интересно его подавать. Жалобы, если и бывают, то редкие, не бывает же идеальных людей, верно?"
+    jump FAQ
+label FAQ4:
+    gg "А во сколько начинаются и заканчиваются пары?"
+    sotrudnic_103 "Первая пара начинается в 8:30, восьмая пара заканчивается в 20:40. Хочу заметить, что не обязательно вы будете начинать и заканчивать в это время."
+    sotrudnic_103 "У первых курсов максимум 5 пар до 17:20, старшие же курсы могут начать обучаться в 14:00 и закончить к семи. Это будет зависеть от расписания, которое составят вашей группе."
+    jump FAQ
+label FAQ5:
+    gg "Нужно ли писать вступительные?"
     sotrudnic_103 "Нет, поступление происходит исключительно по вашему среднему баллу аттестата."
-
-    roditel "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['school_certificate']['text']]"
-    sotrudnic_103 "Справку можно получить после выхода приказа и зачисления."
-
-    roditel "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['medical_certificate']['text']]"
+    jump FAQ
+label FAQ7:
+    roditel "Как получить справку для школы о поступлении?"
+    sotrudnic_103 "Справку можно получить после выхода приказа и зачисления. На нашем сайте (https://kip.fa.ru) можно её заказать."
+    jump FAQ
+label FAQ8:
+    roditel "Кому нужно будет сдать справку 086у? "
     sotrudnic_103 "Все справки вы сдаёте после поступления вашему классному руководителю."
-
-    roditel "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['military_deferral']['text']]"
+    jump FAQ
+label FAQ9:
+    roditel "Будет ли отсрочка от армии? "
     sotrudnic_103 "Да, будет."
-
-    gg "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['campus_card']['text']]"
+    jump FAQ
+label FAQ10:
+    gg "А кампусные карты у вас есть же? Я в группе в ВК видел. У меня такая будет? "
     sotrudnic_103 "Да."
+    jump FAQ
+label FAQ11:
+    gg "А тут также как и в школе будет куча учебников? Если да, то когда и где их забирать?"
+    sotrudnic_103 "Учебники будут, но в небольшом количестве. Обычно их выдают на занятиях или предоставляют в электронном формате. Хотя, если надо, их можно взять в нашей библиотеке."
+    jump FAQ
 
-    gg "[dialogs['chapter_1']['kabinet_103']['questions_about_college']['textbooks']['text']]"
-    sotrudnic_103 "Учебники будут, но в небольшом количестве."
+label specialnosty:
 
     gg "Хорошо. Спасибо большое, что рассказали и ответили на наши вопросы"
     gg "А на какой специальности вы обучались?"
