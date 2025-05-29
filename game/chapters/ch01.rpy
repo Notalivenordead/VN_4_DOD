@@ -3,7 +3,7 @@
 label chapter_01:
     
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
-
+    gg "Экзамены уже прошли, пора бы уже задуматься куда поступать"
     pause
 
     scene bg notebook # 2
@@ -40,18 +40,24 @@ label koptevo:
         "[dialogs['chapter_1']['koptevo']['way_choice']['text']]"
         "Через парк":  # Третий путь
             scene bg koptevo_tablo  # 14
-            goida "[dialogs['chapter_1']['koptevo']['park_dialog']['text']]"
+            gg "О, я уже на станции «Коптево» и мне нужен первый выход" #29.05
+            gg "Выхожу из МЦК и иду до перехода, в парк."
             scene bg koptevo_3  # 15
-            goida "[dialogs['chapter_1']['koptevo']['park_dialog']['text']]"
+            gg "По навигатору мне нужно пройти прямо через парк мимо Головинских прудов, пока не дойду до колледжа."
             scene bg station_other_side  # 8
-            goida "[dialogs['chapter_1']['koptevo']['park_dialog']['text']]"
+            pause
+            scene bg kip_ost_ryadom
         "Чертов 72 автобус":  # Четвертый путь
+            gg "О, я уже на станции «Коптево» и мне нужен второй выход."
             scene bg koptevo_alt_4  # 18
-            goida "[dialogs['chapter_1']['koptevo']['bus72_dialog']['text']]"
-            scene bg kopt_ost  # 19
-            goida "[dialogs['chapter_1']['koptevo']['bus72_dialog']['text']]"
-
-    jump empire_of_light
+            gg "По навигатору мне нужно выйти из МЦК и повернуть налево, пройдя на остановку «Проезд Черепановых»"
+            scene bg kopt_ost  # 
+            pause
+            scene bg kip_ost_ryadom
+            goida "Объявление остановки: Улица Лавочкина, храм Иоанна Кронштадтского."
+    gg "О, вот и колледж! Какой красивый и легко добраться!"
+    
+    jump security_dialog
 
 
 label lihobory: # Пятый путь
@@ -63,7 +69,7 @@ label lihobory: # Пятый путь
 
     pause
 
-    jump empire_of_light
+    jump security_dialog
 
 
 label d3: # Шестой путь
@@ -79,39 +85,37 @@ label d3: # Шестой путь
 
     goida "Идешь туда сюда и в кипе"
 
-    jump empire_of_light
+    jump security_dialog
 
 
 label metro:
     scene bg vs_tablo  # выход из метро
     pause
+    gg "О, уже «Водный стадион», мне нужен первый выход из метро." #29.05
 
     menu choice_vodniy:
         "Куда идем?"
         "Автобус":  # Первый путь
+            gg "Мне нужно подняться вверх по эскалатору и прямо к остановке."
             scene bg vs_ost  # 7
-            goida "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
+            gg "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
             scene bg station_other_side  # 8
             goida "[dialogs['chapter_1']['metro']['bus_dialog_2']['text']]"
+            scene bg kip_ost_ryadom
+            gg "О, какой красивый колледж и так легко найти!"
         "Пешком":  # Второй путь
+            gg "Мне нужно подняться вверх по эскалатору и повернуть налево."
             scene bg vs_pshkom  # 10
-            goida "[dialogs['chapter_1']['metro']['walk_dialog']['text']]"
+            gg "[dialogs['chapter_1']['metro']['walk_dialog']['text']]"
+            scene bg kip_ost_ryadom
+            gg "О, вот и колледж! Какой красивый и легко добраться!"
 
-    jump empire_of_light
-
-
-label empire_of_light:
-
-    scene bg kip_ost_ryadom # 11
-
-    pause
-
-    scene bg kipvhod # 26
-
-    pause
+    jump security_dialog
 
 
 label security_dialog:
+    scene bg kipvhod # 26
+    pause
     scene bg turnikety
     pause
     scene bg post_ohrany
