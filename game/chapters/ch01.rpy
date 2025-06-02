@@ -93,8 +93,9 @@ label koptevo:
             gg "По навигатору мне нужно выйти из МЦК и повернуть налево, пройдя на остановку «Проезд Черепановых»"
             scene bg kopt_ost  # 
             pause
-            scene bg kip_ost_ryadom
+            scene black with dissolve
             goida "Объявление остановки: Улица Лавочкина, храм Иоанна Кронштадтского."
+            scene bg kip_ost_ryadom with dissolve
     gg "О, вот и колледж! Какой красивый и легко добраться!"
     
     jump security_dialog
@@ -139,8 +140,10 @@ label metro:
             gg "Мне нужно подняться вверх по эскалатору и прямо к остановке."
             scene bg vs_ost  # 7
             gg "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
-            scene bg station_other_side  # 8
+            scene black with dissolve
             goida "[dialogs['chapter_1']['metro']['bus_dialog_2']['text']]"
+            scene bg station_other_side with dissolve # 8
+            pause
             scene bg kip_ost_ryadom
             gg "О, какой красивый колледж и так легко найти!"
         "Пешком":  # Второй путь
