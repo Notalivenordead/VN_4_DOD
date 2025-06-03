@@ -1,75 +1,144 @@
 # chapters/ch01.rpy
 init:
-    screen faq(adj): #Завтрашний я, знвй что ты долбаеб, который забил на оптимизацию и обещал ее сделать потот
+    screen maper_1():
         frame:
-            xsize 1640
-            xalign .5
-            ysize 1085
-            ypos 100
+            xpos 500
+            ypos 1800
+            xsize 500
+            textbutton _("Водный стадион"):
+                xfill True
+                action (Hide("maper_1"), Hide("maper_2"), Jump("metro"))
 
-            has side "c r b"
+    screen maper_2():
+        frame:
+            xpos 1630
+            ypos 1770
+            xsize 300
+            textbutton _("Коптево"):
+                xfill True
+                action (Hide("maper_1"), Hide("maper_2"), Jump("koptevo"))
 
-            viewport:
-                yadjustment adj
-                mousewheel True
-                draggable True
+    screen docx():
+        frame:
+            xalign 0.7
+            yalign 0.6
+            textbutton ("Отдать паспорт"):
+                action Return()
+            
 
-                vbox:
-                    $ faq_questions = [
-                        ("А вот вы, как студент данного колледжа, можете рассказать, каково здесь обучаться?", "FAQ1"),
-                        ("А в столовой вкусно кормят?", "FAQ2"),
-                        ("Как обучают преподаватели? Понятно ли? Много ли к ним претензий?", "FAQ3"),
-                        ("А во сколько начинаются и заканчиваются пары?", "FAQ4"),
-                        ("Нужно ли писать вступительные?", "FAQ5"),
-                        ("Как получить справку для школы о поступлении?", "FAQ7"),
-                        ("Кому нужно будет сдать справку 086у?", "FAQ8"),
-                        ("Будет ли отсрочка от армии?", "FAQ9"),
-                        ("А кампусные карты у вас есть же? Я в группе в ВК видел. У меня такая будет?", "FAQ10"),
-                        ("А тут также как и в школе будет куча учебников? Если да, то когда и где их забирать?", "FAQ11")
+    screen specialnosty_screen():
+        
+        frame:
+            xsize 1240
+            xalign .7
+            yalign .25
+
+            vbox:
+                $ specialnost = [
+                        ("Информационные системы и программирование ", "ISIP"),
+                        ("Обеспечение информационной безопасности автоматизированных систем.", "OIBAS"),
+                        ("Интеллектуальные интегрированные системы.", "IIS"),
+                        ("Обеспечение информационной безопасности телекоммуникационных систем", "OIBTS")
                     ]
 
-                    for question, label in faq_questions:
-                        textbutton question:
-                            action Jump(label)
-                            xfill True
-                            
-            bar adjustment adj style "vscrollbar"
+                for question, label in specialnost:
+                    textbutton question:
+                        action Jump(label)
+                        xfill True
+                textbutton _("На этом пока все"):
+                    xfill True
+                    action Jump("questions")
+                    top_margin 10
 
-            textbutton _("На этом пока все"):
-                xfill True
-                action Jump("specialnosty")
-                top_margin 10
+
+    screen faq():
+        modal True
+        frame:
+            xsize 1240
+            xalign .8
+            yalign .25
+            vbox:
+                $ faq_questions = [
+                    ("А вот вы, как студент данного колледжа, можете рассказать, каково здесь обучаться?", "FAQ1"),
+                    ("А в столовой вкусно кормят?", "FAQ2"),
+                    ("Как обучают преподаватели? Понятно ли? Много ли к ним претензий?", "FAQ3"),
+                    ("А во сколько начинаются и заканчиваются пары?", "FAQ4"),
+                    ("Нужно ли писать вступительные?", "FAQ5"),
+                    ("Как получить справку для школы о поступлении?", "FAQ7"),
+                    ("Кому нужно будет сдать справку 086у?", "FAQ8"),
+                    ("Будет ли отсрочка от армии?", "FAQ9"),
+                    ("А кампусные карты у вас есть же? Я в группе в ВК видел. У меня такая будет?", "FAQ10"),
+                    ("А тут также как и в школе будет куча учебников? Если да, то когда и где их забирать?", "FAQ11")
+                ]
+                for question, label in faq_questions:
+                    textbutton question:
+                        action (Hide("faq"), Jump(label))
+                        xfill True
+
+                textbutton _("На этом пока все"):
+                    xfill True
+                    action (Hide("faq"), Jump("specialnosty"))
+                    top_margin 10
 
 label chapter_01:
     
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
-    gg "Экзамены уже прошли, пора бы уже задуматься куда поступать"
-    pause
-
-    scene bg notebook # 2
+    gg "Экзамены уже прошли, пора бы задуматься куда поступать"
+    scene bg procrpoiisk:
+        yalign 0.0
     show laptop_2
+    pause
+    
+    scene bg procrpoiisk: 
+        yalign 0.0
+        linear 1 yalign 1.07/6
+    show laptop_2
+    pause
+    scene bg procrpoiisk:
+        yalign 1.066/6
+        linear 1 yalign 2.14/6
+    show laptop_2
+    pause
+    scene bg procrpoiisk:
+        yalign 2.14/6
+        linear 1 yalign 3.21/6
+    show laptop_2
+    pause
+    scene bg procrpoiisk:
+        yalign 3.21/6
+        linear 1 yalign 4.27/6
+    show laptop_2
+    pause
+    scene bg procrpoiisk:
+        yalign 4.27/6
+        linear 1 yalign 5.34/6
+    show laptop_2
+    pause
+    scene bg procrpoiisk:
+        yalign 5.34/6
+        linear 1 yalign 6.4/6
+    show laptop_2
+    pause
     # Ань тут хз как правильно оформить потом скажи как правильно написать
 
-    gg "[dialogs['chapter_1']['home']['start']['text']]"
+    gg "Хм, КИПФИН выглядит хорошим и перспективным... Может попробовать подать документы в него?"
     $ add_note(
         notes['documents_for_admission'].title,
         notes['documents_for_admission'].text
     )
 
-    # $ add_note("Требования для несовершеннолетних", "Если абитуриенту нет 18 лет, то обязательно надо ехать с родителем. У него с собой должен быть паспорт, Временная прописка (если есть)")
-    gg "Тест базовый завершён (глянь заметки)"
+    $ add_note(
+        "Требования для несовершеннолетних",
+        "Если абитуриенту нет 18 лет, то обязательно надо ехать с родителем. У него с собой должен быть паспорт, Временная прописка (если есть)"
+    )
+    scene bg map
+    jump map
 
-    scene chema_beta
-    menu way:
-        "[dialogs['chapter_1']['home']['way_choice']['text']]"
-        "Через Водный стадион":
-            jump metro
-        # "Моссельмаш": потом доделать, дедлайн горит
-            # jump d3
-        "Через Коптево":
-            jump koptevo
-        #"Лихоборы":  пока не трогаем, непопулярный маршрут, доделаем потом
-        #    jump lihobory
+label map:
+    show screen maper_2()
+    show screen maper_1()
+    pause
+    jump map
 
 
 label koptevo:
@@ -84,7 +153,7 @@ label koptevo:
             gg "Выхожу из МЦК и иду до перехода, в парк."
             scene bg koptevo_3  # 15
             gg "По навигатору мне нужно пройти прямо через парк мимо Головинских прудов, пока не дойду до колледжа."
-            scene bg station_other_side  # 8
+            scene bg kip_ost_napr  # 8
             pause
             scene bg kip_ost_ryadom
         "Чертов 72 автобус":  # Четвертый путь
@@ -100,7 +169,7 @@ label koptevo:
     
     jump security_dialog
 
-
+"""
 label lihobory: # Пятый путь
     scene bg lihobory_1 # в раскадровке 17 = bg koptevo
 
@@ -127,7 +196,7 @@ label d3: # Шестой путь
     goida "Идешь туда сюда и в кипе"
 
     jump security_dialog
-
+"""
 
 label metro:
     scene bg vs_tablo  # выход из метро
@@ -142,7 +211,7 @@ label metro:
             gg "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
             scene black with dissolve
             goida "[dialogs['chapter_1']['metro']['bus_dialog_2']['text']]"
-            scene bg station_other_side with dissolve # 8
+            scene bg kip_ost_napr with dissolve # 8
             pause
             scene bg kip_ost_ryadom
             gg "О, какой красивый колледж и так легко найти!"
@@ -162,37 +231,46 @@ label security_dialog:
     scene bg turnikety
     pause
     scene bg post_ohrany
-    show ohrannik seriyezny
-    gg "[dialogs['chapter_1']['security_dialog']['greeting']['text']]"
-    security "[dialogs['chapter_1']['security_dialog']['security_response']['text']]"
+    show ohrannik seriyezny with dissolve
+    gg "Здравствуйте, куда нужно пройти, чтобы попасть в приёмную комиссию?"
+    security "Здравствуйте, чтобы подать документы нужно пройти в 103 кабинет. Можно ваш паспорт, пожалуйста."
+    call screen docx()
+    gg "Да, конечно."
     show ohrannik prov_docs
-    gg "[dialogs['chapter_1']['security_dialog']['passport_request']['text']]"
+    pause
     show ohrannik seriyezny
-    security "[dialogs['chapter_1']['security_dialog']['directions']['text']]"
+    security "Всё хорошо, вам от турникетов налево до конца коридора."
     hide security
     jump kabinet_103
 
     
 label kabinet_103:
     scene bg 115_view # 29
-
-    pause
+    gg "Сначала мне нужно пройти налево в 103 кабинет, а в 115 я еще вернусь "
 
     scene bg 103_view # 30
 
     pause
 
-    scene bg dialog_103 with fade
+    scene bg 103 with fade
 
     pause
 
-    show kirill_smile
+    image kirill:
+        "kirill_smile" with dissolve
+        pause 20.0
+        "kirill_vbok" with dissolve
+        pause 5.0
+        repeat
+    show kirill
 
     gg "[dialogs['chapter_1']['kabinet_103']['greeting']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_question']['text']]"
     gg "[dialogs['chapter_1']['kabinet_103']['form_answer']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_instruction']['text']]"
 
+    show bg pk_kip
+    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_warning']['text']]"
     $ add_note(
         notes["data_for_application_form"].title,
         notes["data_for_application_form"].text
@@ -212,18 +290,21 @@ label kabinet_103:
         notes["education_data_filling"].title,
         notes["education_data_filling"].text
     )
+
+    
     jump FAQ
 
 label FAQ:
-    call screen faq(adj=ui.adjustment())
-    jump specialnosty
+    show screen faq()
+    sotrudnic_103 "У вас остались какие-нибудь вопросы?"
+    jump FAQ
 
 
 label FAQ1:
     roditel "А вот вы, как студент данного колледжа, можете рассказать, каково здесь обучаться?"
     sotrudnic_103 "Хм… Обучение в Колледже Информатики и Программирования очень увлекательное, к тому же здесь я встретил много приятных и интересных людей."
     sotrudnic_103 "Мне все очень нравится, особенно возможность реализовывать свои проекты и применять знания на практике."
-    jump start
+    jump FAQ
 
 label FAQ2:
     gg "А в столовой вкусно кормят?"
@@ -264,17 +345,33 @@ label FAQ11:
     sotrudnic_103 "Учебники будут, но в небольшом количестве. Обычно их выдают на занятиях или предоставляют в электронном формате. Хотя, если надо, их можно взять в нашей библиотеке."
     jump FAQ
 
+label ISIP:
+    sotrudnic_103 "На этой специальности изучают такие языки, как C++, C# и Java и многие другие, чтобы создавать программы для Windows и Linux, а также писать различные сайты. В основном мы работаем в Visual Studio и часто создаем свои собственные программы. "
+    sotrudnic_103 "Срок обучения составляет 3 года и 10 месяцев. После окончания колледжа вы получаете профессию  – программист."
+    jump special
+label OIBAS:
+    sotrudnic_103 "На этом направлении вы будете изучать законодательную базу защиты информации, научитесь защищать информацию в компаниях и разбираться в шифрах, а также  узнаете, как устанавливать камеры, датчики и сигнализации, сможете ставить программы, и настраивать их так, чтобы доступ к информации был только у вас. После учёбы получите профессию техника по безопасности. Срок обучения составляет 3 года и 10 месяцев."
+    jump special
+label IIS:
+    sotrudnic_103 "На этой специальности вы научитесь управлять разными устройствами с помощью компьютера, наподобие Умного дома. Вы узнаете, как объединять части программ, исправлять ошибки и делать так, чтобы программы и техника работали вместе. После окончания колледжа вы станете техником по умным системам. На эту специальность нужно учиться 2 года и 10 месяцев."
+    jump special
+label OIBTS:
+    sotrudnic_103 "На данный момент можно поступить только на бюджет. После колледжа вы сможете работать техником по защите информации. Вы будете управлять рисками информационной безопасности, определять уязвимости и угрозы моделированием системы защиты информации, а также организацией защиты сетей связи. Срок обучения составляет 3 года и 10 месяцев."
+    jump special
+
 label specialnosty:
 
-    gg "Хорошо. Спасибо большое, что рассказали и ответили на наши вопросы"
+    gg "Нет, мы узнали все, что хотели. Спасибо большое, что рассказали и ответили на наши вопросы!"
     gg "А на какой специальности вы обучались?"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['specialties']['introduction']['text']]"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['specialties']['information_systems']['text']]"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['specialties']['information_security']['text']]"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['specialties']['smart_systems']['text']]"
-    sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['specialties']['telecom_security']['text']]"
-
+    sotrudnic_103 "Я учусь на специальности Информационные системы и программирование."
+    sotrudnic_103 "На какую специальность вы собираетесь поступать?"
     gg "Не уверен еще, могли бы вы рассказать подробнее о специальностях?"
+    jump special
+
+label special:
+    call screen specialnosty_screen()
+
+label questions:
     sotrudnic_103 "Вы можете выбрать несколько специальностей и поставить им разный приоритет."
     gg "Приоритет?"
     sotrudnic_103 "Вы будете участвовать в конкурсе аттестатов на несколько специальностей, но если проходите на все, то вас зачислит на специальность у которой приоритет выше."
@@ -284,62 +381,81 @@ label specialnosty:
         notes["transfer_to_budget"].text
     )
 
-    sotrudnic_103 "Вы будете поступать на бюджет или на платную основу?"
+    
     menu choice_form:
-            "Выбор бюджет/платка"
+            sotrudnic_103 "Вы будете поступать на бюджет или на платную основу?"
             "Бюджет":
                 $ platka = False
             "Платное обучение":
+                #$ add_note(
+                #    "Заметка 563",
+                #    "На специальностях ИСИП, ОИБАС, ИИС в будущем можно перевестись на бюджет только после 2 курса."
+                #)
                 $ platka = True
-    sotrudnic_103 "Хорошо, проходите в 115 кабинет!"
+    sotrudnic_103 "Хорошо, мы всё заполнили, можете проходить в 115 кабинет!"
     gg "Спасибо, до свидания!"
-    pause
 
     jump kabinet_115
 
 label kabinet_115:
     scene bg 115_view with fade
     pause
-    scene bg dialog_115 with fade
+    scene bg 115 with fade
     pause
-    show sotrudnic_115
-    sotrudnic_115 "Добрый день! У вас есть какие-нибудь дипломы, сертификаты и прочее за последние 2 года?"
-    sotrudnic_115 "Давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
-    sotrudnic_115 "Вы будете оставлять оригинал или копию аттестата? Если вы решите поступать в наш колледж на бюджет, то до конца работы приёмной комиссии нужно будет сдать оригинал, если на платную основу – оригинал надо оставить сразу."
+    image sotr_115:
+        "sotrudnic_115_smile" with dissolve
+        pause 15.0
+        "sotrudnic_115" with dissolve
+        pause 3.0
+        repeat
+    show sotr_115 
+    sotrudnic_115 " Добрый день! Вы уже заполнили анкету в 103 кабинете? "
+    gg "Да, все заполнено."
+    
+    menu choice_sertificate:
+        sotrudnic_115 "Отлично. У вас есть какие-нибудь дипломы, сертификаты и прочее за последние 2 года?"
+        "Да":
+            sotrudnic_115 "Отлично, давайте их и ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
+        "Нет":
+            sotrudnic_115 "Ничего страшного. Давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
+    
     if platka:
         $ add_note(
             notes["tuition_payment"].title,
             notes["tuition_payment"].text
             )
+        sotrudnic_115 "Вы можете сами выбрать как будете оплачивать обучение, но при заключении договора вы сразу оплачиваете минимально первый семестр обучения. Это можно сделать: С помощью квитанции через оператора банка, через терминал, с помощью системы онлайн-оплаты, с квитанцией в самом банке."
+        sotrudnic_115 "Оплатить обучение возможно материнским капиталом. В данном случае заключается дополнительное соглашение на оплату по мат. Капиталу. Для этого надо иметь при себе оригинал сертификата. После заключения выдаются бумаги для пенсионного фонда. Важно! Им можно оплатить как всю сумму, так и часть. Данные средства идут долго, месяц-два."
+        sotrudnic_115 "После заключения договора, чек об оплате обучения за 1 семестр необходимо выслать на электронную почту приемной комиссии: KIPFINpriemka@fa.ru"
+        sotrudnic_115 "Также договор можно расторгнуть и средства, которыми вы оплатили обучение, вернутся."
+    else:
+        gg "Нам говорили про конкурс аттестатов, можете рассказать подробнее?"
+        sotrudnic_115 "Конкурс аттестатов при поступлении в колледж — это рейтинг абитуриентов на основе среднего балла аттестата. Средний балл считается так: все оценки складывают и делят на количество предметов. Чем больше средний балл, тем лучше."
+        sotrudnic_115 "Если мест меньше, чем желающих, берут тех, у кого больше баллов. Также если на последнее место претендует несколько человек с одним баллом будут учитываться грамоты."
+        gg "А где можно найти этот список?"
+        sotrudnic_115 "Списки можно посмотреть на сайте ({a=https://kip.fa.ru}https://kip.fa.ru{/a}), в разделе «Приёмная комиссия»."
+
+        menu choice_attectat:
+            sotrudnic_115 "Вы будете оставлять оригинал или копию аттестата? Если вы решите поступать в наш колледж на бюджет, то до конца работы приёмной комиссии нужно будет привезти и сдать оригинал, если на платную основу – оригинал надо оставить сразу."
+            "Оставить копию аттестата":
+                sotrudnic_115 "Не забудбте до конца приемной комиссии оставить оригинал. Будем рады Вас видеть, удачи в поступлении!"
+            "Оставить оригинал":
+                sotrudnic_115 "Следите за списками на сайте колледжа. Будем рады Вас видеть, удачи в поступлении!"
+
     
-    gg "Нам говорили про конкурс аттестатов, можете рассказать подробнее?"
-    sotrudnic_115 "Конкурс аттестатов при поступлении в колледж — это рейтинг абитуриентов на основе среднего балла аттестата. Средний балл считается так: все оценки складывают и делят на количество предметов. Чем выше средний балл, тем лучше."
-    sotrudnic_115 "Если мест меньше, чем желающих, берут тех, у кого больше баллов. Также если на последнее место претендует несколько человек с одним баллом будут учитываться грамоты."
-    gg "А где можно найти этот список?"
-    sotrudnic_115 "Списки можно посмотреть на сайте ({a=https://kip.fa.ru}https://kip.fa.ru{/a}), в разделе «Приёмная комиссия»."
-
-
-    #menu choice_attectat:
-        #    "А зачем тут выбор?"
-        #    "Оставить копию аттестата":
-        #        sotrudnic_115 "Заглушка"
-        #    "Оставить оригинал":
-        #        sotrudnic_115 "Заглушка"
-
-    sotrudnic_115 "Следите за списками на сайте колледжа. Будем рады Вас видеть, удачи в поступлении!"
     
     gg "Спасибо, до свидания!"
     
-    scene bg 115_view
+    scene bg 115_view with fade
     pause
-    scene bg turnikety with fade
+    scene bg turnikety 
     pause
     scene bg kipvhod
     pause
     scene bg window_1 with fade
-    pause
+    gg "Надо посмотреть приказы о зачислении на сайте колледжа."
     scene bg notebook_goooool
     show laptop_2
-    pause
+    gg "О, отлично! Я поступил!"
 
     return
