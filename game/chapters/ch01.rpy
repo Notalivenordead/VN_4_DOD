@@ -1,22 +1,20 @@
 # chapters/ch01.rpy
 init:
-    screen maper_1():
+   screen maper():
         frame:
             xpos 500
             ypos 1800
             xsize 500
             textbutton _("Водный стадион"):
                 xfill True
-                action (Hide("maper_1"), Hide("maper_2"), Jump("metro"))
-
-    screen maper_2():
+                action (Hide("maper"), Jump("metro"))
         frame:
             xpos 1630
             ypos 1770
             xsize 300
             textbutton _("Коптево"):
                 xfill True
-                action (Hide("maper_1"), Hide("maper_2"), Jump("koptevo"))
+                action (Hide("maper"), Jump("koptevo"))
 
     screen docx():
         frame:
@@ -132,13 +130,7 @@ label chapter_01:
         "Если абитуриенту нет 18 лет, то обязательно надо ехать с родителем. У него с собой должен быть паспорт, Временная прописка (если есть)"
     )
     scene bg map
-    jump map
-
-label map:
-    show screen maper_2()
-    show screen maper_1()
-    pause
-    jump map
+    call screen maper()
 
 
 label koptevo:
