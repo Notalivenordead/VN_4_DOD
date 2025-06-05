@@ -1,7 +1,10 @@
 # chapters/ch01.rpy
+init python:
+    renpy.music.register_channel("sound_2", "sfx", True)
 init:
-   screen maper():
+    screen maper():
         frame:
+            padding (15, 25)
             xpos 500
             ypos 1800
             xsize 500
@@ -9,6 +12,7 @@ init:
                 xfill True
                 action (Hide("maper"), Jump("metro"))
         frame:
+            padding (15, 25)
             xpos 1630
             ypos 1770
             xsize 300
@@ -18,6 +22,7 @@ init:
 
     screen docx():
         frame:
+            padding (10, 20)
             xalign 0.7
             yalign 0.6
             textbutton ("Отдать паспорт"):
@@ -27,6 +32,7 @@ init:
     screen specialnosty_screen():
         
         frame:
+            padding (15, 25)
             xsize 1240
             xalign .7
             yalign .25
@@ -50,8 +56,10 @@ init:
 
 
     screen faq():
+        
         modal True
         frame:
+            padding (15, 25)
             xsize 1240
             xalign .8
             yalign .25
@@ -79,9 +87,12 @@ init:
                     top_margin 10
 
 label chapter_01:
-    
+    stop music fadeout 1.0
+
+    queue music ["music_7.mp3", "music_8.mp3"] volume 0.5 fadein 1.0
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
     gg "Экзамены уже прошли, пора бы задуматься куда поступать"
+    play sound_2 "tap_tap.mp3"
     scene bg procrpoiisk:
         yalign 0.0
     show laptop_2
@@ -117,6 +128,7 @@ label chapter_01:
         linear 1 yalign 6.4/6
     show laptop_2
     pause
+    stop sound_2 fadeout 1
     # Ань тут хз как правильно оформить потом скажи как правильно написать
 
     gg "Хм, КИПФИН выглядит хорошим и перспективным... Может попробовать подать документы в него?"
@@ -126,15 +138,17 @@ label chapter_01:
     )
 
     $ add_note(
-        "Требования для несовершеннолетних",
+        "Несовершеннолетним",
         "Если абитуриенту нет 18 лет, то обязательно надо ехать с родителем. У него с собой должен быть паспорт, Временная прописка (если есть)"
     )
     scene bg map
     call screen maper()
 
 
+
+
 label koptevo:
-    scene bg koptevo_1  # 13 + 17
+    scene black  # 13 + 17
     pause
 
     menu choice_koptevo:
@@ -148,7 +162,7 @@ label koptevo:
             scene bg kip_ost_napr  # 8
             pause
             scene bg kip_ost_ryadom
-        "Чертов 72 автобус":  # Четвертый путь
+        "Автобус 72":  # Четвертый путь
             gg "О, я уже на станции «Коптево» и мне нужен второй выход."
             scene bg koptevo_alt_4  # 18
             gg "По навигатору мне нужно выйти из МЦК и повернуть налево, пройдя на остановку «Проезд Черепановых»"
@@ -192,6 +206,8 @@ label d3: # Шестой путь
 
 label metro:
     scene bg vs_tablo  # выход из метро
+    stop music fadeout 1
+    play sound "metro.mp3" volume 0.3
     pause
     gg "О, уже «Водный стадион», мне нужен первый выход из метро." #29.05
 
@@ -199,6 +215,8 @@ label metro:
         "Куда идем?"
         "Автобус":  # Первый путь
             gg "Мне нужно подняться вверх по эскалатору и прямо к остановке."
+            stop sound fadeout 1
+            queue music ["music_8.mp3", "music_7.mp3"] volume 0.5 fadein 1
             scene bg vs_ost  # 7
             gg "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
             scene black with dissolve
@@ -206,11 +224,15 @@ label metro:
             scene bg kip_ost_napr with dissolve # 8
             pause
             scene bg kip_ost_ryadom
+            
             gg "О, какой красивый колледж и так легко найти!"
         "Пешком":  # Второй путь
             gg "Мне нужно подняться вверх по эскалатору и повернуть налево."
+            play sound "street_sound.mp3" volume 0.4 fadein 1 fadeout 1
             scene bg vs_pshkom  # 10
             gg "[dialogs['chapter_1']['metro']['walk_dialog']['text']]"
+            stop sound fadeout 1
+            queue music ["music_8.mp3", "music_7.mp3"] volume 0.5
             scene bg kip_ost_ryadom
             gg "О, вот и колледж! Какой красивый и легко добраться!"
 
@@ -243,8 +265,9 @@ label kabinet_103:
     scene bg 103_view # 30
 
     pause
-
+    play sound "door_open.mp3"
     scene bg 103 with fade
+    play music "music_10.mp3" fadeout 0.5 fadein 1 volume 0.4
 
     pause
 
@@ -260,14 +283,31 @@ label kabinet_103:
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_question']['text']]"
     gg "[dialogs['chapter_1']['kabinet_103']['form_answer']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_instruction']['text']]"
+    play sound_2 "tap_tap.mp3"
 
+    scene spritepit:
+        yalign -0.004
     show bg pk_kip
+    pause
+    
+    scene spritepit:
+        yalign 0.0
+        linear 1 yalign 1.08/10
+    show bg pk_kip
+    pause
+
+
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_warning']['text']]"
     $ add_note(
         notes["data_for_application_form"].title,
         notes["data_for_application_form"].text
     )
-
+    scene spritepit:
+        yalign 1.08/10
+        linear 1 yalign 2.20/10
+    show bg pk_kip
+    pause
+    
     gg "[dialogs['chapter_1']['kabinet_103']['parent_data_question']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['parent_data_answer']['text']]"
 
@@ -275,9 +315,40 @@ label kabinet_103:
         notes["parents_documents"].title,
         notes["parents_documents"].text
     )
-
+    scene spritepit:
+        yalign 2.20/10
+        linear 1 yalign 3.303/10
+    show bg pk_kip
+    pause
+    scene spritepit:
+        yalign 3.303/10
+        linear 1 yalign 4.408/10
+    show bg pk_kip
+    pause
+    scene spritepit:
+        yalign 4.408/10
+        linear 1 yalign 5.510/10
+    show bg pk_kip
+    pause
+    scene spritepit:
+        yalign 5.510/10
+        linear 1 yalign 6.613/10
+    show bg pk_kip
+    pause
+    scene spritepit:
+        yalign 6.613/10
+        linear 1 yalign 7.717/10
+    show bg pk_kip
+    pause
+    stop sound_2 fadeout 1
+    
+    
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['education_data_instruction']['text']]"
-
+    scene spritepit:
+        yalign 7.717/10
+        linear 1 yalign 8.82/10
+    show bg pk_kip
+    pause
     $ add_note(
         notes["education_data_filling"].title,
         notes["education_data_filling"].text
@@ -287,6 +358,7 @@ label kabinet_103:
     jump FAQ
 
 label FAQ:
+    show kirill
     show screen faq()
     sotrudnic_103 "У вас остались какие-нибудь вопросы?"
     jump FAQ
@@ -392,7 +464,9 @@ label questions:
 label kabinet_115:
     scene bg 115_view with fade
     pause
+    play sound "door_knock.mp3"
     scene bg 115 with fade
+    play music "music_10.mp3" fadeout 0.5 fadein 1 volume 0.4
     pause
     image sotr_115:
         "sotrudnic_115_smile" with dissolve
