@@ -21,11 +21,11 @@ init:
                 action (Hide("maper"), Jump("koptevo"))
 
     screen docx():
-        frame:
+        frame: 
             padding (10, 20)
             xalign 0.7
             yalign 0.6
-            textbutton ("Отдать паспорт"):
+            textbutton ("{size=+20}Отдать паспорт"):
                 action Return()
             
 
@@ -78,6 +78,7 @@ init:
                 ]
                 for question, label in faq_questions:
                     textbutton question:
+                        
                         action (Hide("faq"), Jump(label))
                         xfill True
 
@@ -91,7 +92,7 @@ label chapter_01:
 
     queue music ["music_7.mp3", "music_8.mp3"] volume 0.5 fadein 1.0
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
-    gg "Экзамены уже прошли, пора бы задуматься куда поступать"
+    gg_first "Экзамены уже прошли, пора бы задуматься куда поступать"
     play sound_2 "tap_tap.mp3"
     scene bg procrpoiisk:
         yalign 0.0
@@ -240,14 +241,15 @@ label metro:
 
 
 label security_dialog:
-    scene bg kipvhod # 26
+    scene bg kipvhod with fade
     pause
-    scene bg turnikety
+    scene bg turnikety with fade
     pause
     scene bg post_ohrany
     show ohrannik seriyezny with dissolve
+    security "Здравствуйте."
     gg "Здравствуйте, куда нужно пройти, чтобы попасть в приёмную комиссию?"
-    security "Здравствуйте, чтобы подать документы нужно пройти в 103 кабинет. Можно ваш паспорт, пожалуйста."
+    security "Чтобы подать документы нужно пройти в 103 кабинет. Можно ваш паспорт, пожалуйста."
     call screen docx()
     gg "Да, конечно."
     show ohrannik prov_docs
@@ -341,7 +343,10 @@ label kabinet_103:
     show bg pk_kip
     pause
     stop sound_2 fadeout 1
-    
+    $ add_note(
+        notes["education_data_filling"].title,
+        notes["education_data_filling"].text
+    )
     
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['education_data_instruction']['text']]"
     scene spritepit:
@@ -349,16 +354,14 @@ label kabinet_103:
         linear 1 yalign 8.82/10
     show bg pk_kip
     pause
-    $ add_note(
-        notes["education_data_filling"].title,
-        notes["education_data_filling"].text
-    )
+    
 
     
     jump FAQ
 
 label FAQ:
     show kirill
+    
     show screen faq()
     sotrudnic_103 "У вас остались какие-нибудь вопросы?"
     jump FAQ
@@ -481,9 +484,9 @@ label kabinet_115:
     menu choice_sertificate:
         sotrudnic_115 "Отлично. У вас есть какие-нибудь дипломы, сертификаты и прочее за последние 2 года?"
         "Да":
-            sotrudnic_115 "Отлично, давайте их и ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
+            sotrudnic_115 "Отлично. Пожалуйста, давайте их и ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
         "Нет":
-            sotrudnic_115 "Ничего страшного. Давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
+            sotrudnic_115 "Ничего страшного. Пожалуйста, давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
     
     if platka:
         $ add_note(
@@ -504,7 +507,7 @@ label kabinet_115:
         menu choice_attectat:
             sotrudnic_115 "Вы будете оставлять оригинал или копию аттестата? Если вы решите поступать в наш колледж на бюджет, то до конца работы приёмной комиссии нужно будет привезти и сдать оригинал, если на платную основу – оригинал надо оставить сразу."
             "Оставить копию аттестата":
-                sotrudnic_115 "Не забудбте до конца приемной комиссии оставить оригинал. Будем рады Вас видеть, удачи в поступлении!"
+                sotrudnic_115 "Не забудьте до конца приемной комиссии оставить оригинал. Будем рады Вас видеть, удачи в поступлении!"
             "Оставить оригинал":
                 sotrudnic_115 "Следите за списками на сайте колледжа. Будем рады Вас видеть, удачи в поступлении!"
 
@@ -514,14 +517,13 @@ label kabinet_115:
     
     scene bg 115_view with fade
     pause
-    scene bg turnikety 
+    scene bg turnikety with fade
     pause
-    scene bg kipvhod
+    scene bg kipvhod with fade
     pause
     scene bg window_1 with fade
     gg "Надо посмотреть приказы о зачислении на сайте колледжа."
-    scene bg notebook_goooool
-    show laptop_2
+    scene bg laptopfinal
     gg "О, отлично! Я поступил!"
 
     return
