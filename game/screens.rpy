@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## Инициализация
 ################################################################################
 
@@ -297,42 +297,41 @@ screen navigation():
         spacing gui.navigation_spacing
 
         if main_menu:
-
-            textbutton _("Начать") action Start()
+            textbutton _("{size=+20}Начать") action Start()
 
         else:
 
-            textbutton _("История") action ShowMenu("history")
+            textbutton _("{size=+20}История") action ShowMenu("history")
 
-            textbutton _("Сохранить") action ShowMenu("save")
+            textbutton _("{size=+20}Сохранить") action ShowMenu("save")
             
             # Кнопка для заметок (в меню)
-            textbutton "Заметки" action Show("notes_screen")
+            textbutton "{size=+20}Заметки" action Show("notes_screen")
 
-        textbutton _("Загрузить") action ShowMenu("load")
+        textbutton _("{size=+20}Загрузить") action ShowMenu("load")
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+        textbutton _("{size=+20}Настройки") action ShowMenu("preferences")
 
         if _in_replay:
 
-            textbutton _("Завершить повтор") action EndReplay(confirm=True)
+            textbutton _("{size=+20}Завершить повтор") action EndReplay(confirm=True)
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
+            textbutton _("{size=+20}Главное меню") action MainMenu()
 
-        textbutton _("Об игре") action ShowMenu("about")
+        textbutton _("{size=+20}Об игре") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Помощь не необходима и не относится к мобильным устройствам.
-            textbutton _("Помощь") action ShowMenu("help")
+            textbutton _("{size=+20}Помощь") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("{size=+20}Выход") action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -371,6 +370,8 @@ screen main_menu():
     if gui.show_name:
 
         vbox:
+            xpos 1800
+            ypos 550
             style "main_menu_vbox"
 
             text "[config.name!t]":
@@ -381,8 +382,10 @@ screen main_menu():
 
 
 style main_menu_frame is empty
-style main_menu_vbox is vbox
-style main_menu_text is gui_text
+style main_menu_vbox is vbox:
+    font "RuneScape-ENA.ttf"
+style main_menu_text is gui_text:
+    font "RuneScape-ENA.ttf"
 style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
