@@ -92,6 +92,8 @@ label chapter_01:
 
     queue music ["music_7.mp3", "music_8.mp3"] volume 0.5 fadein 1.0
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
+    gg "Да, конечно. Всё верно."
+    roditel "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit nisl eu ex laoreet faucibus. Nulla volutpat mollis velit ut faucibus. Ut quis neque ut nunc rutrum ultricies sit amet."
     gg_first "Экзамены уже прошли, пора бы задуматься куда поступать"
     play sound_2 "tap_tap.mp3"
     scene bg procrpoiisk:
