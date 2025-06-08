@@ -22,10 +22,10 @@ init:
 
     screen docx():
         frame: 
-            padding (10, 20)
+            padding (20, 20)
             xalign 0.7
             yalign 0.6
-            textbutton ("{size=+20}Отдать паспорт"):
+            textbutton ("{font=RuneScape-ENA.ttf}{size=+40}Отдать паспорт"):
                 action Return()
             
 
@@ -92,45 +92,33 @@ label chapter_01:
 
     queue music ["music_7.mp3", "music_8.mp3"] volume 0.5 fadein 1.0
     scene bg window_1 # 1 (номер около bg - номер в раскадровке)
-    gg "Да, конечно. Всё верно."
-    roditel "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc hendrerit nisl eu ex laoreet faucibus. Nulla volutpat mollis velit ut faucibus. Ut quis neque ut nunc rutrum ultricies sit amet."
     gg_first "Экзамены уже прошли, пора бы задуматься куда поступать"
     play sound_2 "tap_tap.mp3"
-    scene bg procrpoiisk:
+    scene bg procrpoiisk_v2:
         yalign 0.0
     show laptop_2
     pause
     
-    scene bg procrpoiisk: 
+    scene bg procrpoiisk_v2: 
         yalign 0.0
         linear 1 yalign 1.07/6
     show laptop_2
     pause
-    scene bg procrpoiisk:
+    scene bg procrpoiisk_v2:
         yalign 1.066/6
         linear 1 yalign 2.14/6
     show laptop_2
     pause
-    scene bg procrpoiisk:
+    scene bg procrpoiisk_v2:
         yalign 2.14/6
-        linear 1 yalign 3.21/6
+        linear 1 yalign 3.198/6
     show laptop_2
     pause
-    scene bg procrpoiisk:
-        yalign 3.21/6
-        linear 1 yalign 4.27/6
+    scene bg procrpoiisk_v2:
+        yalign 3.198/6
+        linear 1 yalign 4.26/6
     show laptop_2
-    pause
-    scene bg procrpoiisk:
-        yalign 4.27/6
-        linear 1 yalign 5.34/6
-    show laptop_2
-    pause
-    scene bg procrpoiisk:
-        yalign 5.34/6
-        linear 1 yalign 6.4/6
-    show laptop_2
-    pause
+
     stop sound_2 fadeout 1
     # Ань тут хз как правильно оформить потом скажи как правильно написать
 
@@ -144,7 +132,7 @@ label chapter_01:
         "Несовершеннолетним",
         "Если абитуриенту нет 18 лет, то обязательно надо ехать с родителем. У него с собой должен быть паспорт, Временная прописка (если есть)"
     )
-    scene bg map
+    scene bg map_v2
     call screen maper()
 
 
@@ -153,6 +141,21 @@ label chapter_01:
 label koptevo:
     scene black  # 13 + 17
     pause
+    transform strelka_trans:
+        zoom 0.5
+        rotate(130)
+        xpos 1300
+        ypos 600
+        parallel:
+            linear 2 xpos 1360 
+            linear 2 xpos 1300
+            repeat
+        parallel:
+            linear 2 ypos 650
+            linear 2 ypos 600
+            repeat
+         
+
 
     menu choice_koptevo:
         "[dialogs['chapter_1']['koptevo']['way_choice']['text']]"
@@ -160,14 +163,15 @@ label koptevo:
             scene bg koptevo_tablo  # 14
             gg "О, я уже на станции «Коптево» и мне нужен первый выход" #29.05
             gg "Выхожу из МЦК и иду до перехода, в парк."
-            scene bg koptevo_3  # 15
+            scene koptevo_park  # 15
             gg "По навигатору мне нужно пройти прямо через парк мимо Головинских прудов, пока не дойду до колледжа."
-            scene bg kip_ost_napr  # 8
+            scene bg kip_ost_napr
+            show strelka at strelka_trans # 8
             pause
             scene bg kip_ost_ryadom
         "Автобус 72":  # Четвертый путь
             gg "О, я уже на станции «Коптево» и мне нужен второй выход."
-            scene bg koptevo_alt_4  # 18
+            scene koptevo_bus_tablo  # 18
             gg "По навигатору мне нужно выйти из МЦК и повернуть налево, пройдя на остановку «Проезд Черепановых»"
             scene bg kopt_ost  # 
             pause
@@ -224,7 +228,9 @@ label metro:
             gg "[dialogs['chapter_1']['metro']['bus_dialog']['text']]"
             scene black with dissolve
             goida "[dialogs['chapter_1']['metro']['bus_dialog_2']['text']]"
-            scene bg kip_ost_napr with dissolve # 8
+            scene bg kip_ost_napr # 8
+            show strelka at strelka_trans
+                
             pause
             scene bg kip_ost_ryadom
             
@@ -255,6 +261,7 @@ label security_dialog:
     call screen docx()
     gg "Да, конечно."
     show ohrannik prov_docs
+    window hide
     pause
     show ohrannik seriyezny
     security "Всё хорошо, вам от турникетов налево до конца коридора."
@@ -283,7 +290,7 @@ label kabinet_103:
         repeat
     show kirill
 
-    gg "[dialogs['chapter_1']['kabinet_103']['greeting']['text']]"
+    #gg "[dialogs['chapter_1']['kabinet_103']['greeting']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_question']['text']]"
     gg "[dialogs['chapter_1']['kabinet_103']['form_answer']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_instruction']['text']]"
@@ -292,16 +299,17 @@ label kabinet_103:
     scene spritepit:
         yalign -0.004
     show bg pk_kip
-    pause
+    gg "В первую очередь мне нужно прикрепить свою фотографию."
+
     
     scene spritepit:
         yalign 0.0
         linear 1 yalign 1.08/10
     show bg pk_kip
-    pause
-
-
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['form_warning']['text']]"
+    gg "Далее мне нужно заполнить свои персональные данные в точности, как они указаны в паспорте."
+
+    
     $ add_note(
         notes["data_for_application_form"].title,
         notes["data_for_application_form"].text
@@ -310,7 +318,8 @@ label kabinet_103:
         yalign 1.08/10
         linear 1 yalign 2.20/10
     show bg pk_kip
-    pause
+    gg "Заполнить информацию о паспорте и добавить данные об одном из родителей или законных представителей."
+    
     
     gg "[dialogs['chapter_1']['kabinet_103']['parent_data_question']['text']]"
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['parent_data_answer']['text']]"
@@ -323,12 +332,12 @@ label kabinet_103:
         yalign 2.20/10
         linear 1 yalign 3.303/10
     show bg pk_kip
-    pause
+    gg "Мне нужно заполнить свои контакты и адрес места регистрации."
     scene spritepit:
         yalign 3.303/10
         linear 1 yalign 4.408/10
     show bg pk_kip
-    pause
+    sotrudnic_103 "Вам нужно отсканировать первую и вторую страницы паспорта и обязательно прикрепить их в формате bmp, jpg или jpeg."
     scene spritepit:
         yalign 4.408/10
         linear 1 yalign 5.510/10
@@ -338,24 +347,29 @@ label kabinet_103:
         yalign 5.510/10
         linear 1 yalign 6.613/10
     show bg pk_kip
-    pause
+    gg "Подписать и прикрепить согласие на участие в электронном взаимодействии."
     scene spritepit:
         yalign 6.613/10
         linear 1 yalign 7.717/10
     show bg pk_kip
-    pause
-    stop sound_2 fadeout 1
+    
     $ add_note(
         notes["education_data_filling"].title,
         notes["education_data_filling"].text
     )
     
     sotrudnic_103 "[dialogs['chapter_1']['kabinet_103']['education_data_instruction']['text']]"
+    gg "Теперь мне  нужно заполнить данные аттестата "
+    $ add_note(
+        "Оставление оригинала",
+        "Для вашего зачисления до конца приёмной кампании вы должны оставить оригинал."
+    )
     scene spritepit:
         yalign 7.717/10
         linear 1 yalign 8.82/10
     show bg pk_kip
-    pause
+    gg "И последнее, нужно выбрать программу обучения – бюджетная или платная основа, и специальность, на которую собираюсь поступать."
+    stop sound_2 fadeout 1
     
 
     
@@ -461,6 +475,11 @@ label questions:
                 #    "На специальностях ИСИП, ОИБАС, ИИС в будущем можно перевестись на бюджет только после 2 курса."
                 #)
                 $ platka = True
+    $ add_note(
+            notes["tuition_payment"].title,
+            notes["tuition_payment"].text
+            )
+    
     sotrudnic_103 "Хорошо, мы всё заполнили, можете проходить в 115 кабинет!"
     gg "Спасибо, до свидания!"
 
@@ -471,7 +490,7 @@ label kabinet_115:
     pause
     play sound "door_knock.mp3"
     scene bg 115 with fade
-    play music "music_10.mp3" fadeout 0.5 fadein 1 volume 0.4
+    #play music "music_10.mp3" fadeout 0.5 fadein 1 volume 0.4
     pause
     image sotr_115:
         "sotrudnic_115_smile" with dissolve
@@ -491,10 +510,6 @@ label kabinet_115:
             sotrudnic_115 "Ничего страшного. Пожалуйста, давайте ваши документы, которые вы указывали в 103 аудитории, я сделаю копии."
     
     if platka:
-        $ add_note(
-            notes["tuition_payment"].title,
-            notes["tuition_payment"].text
-            )
         sotrudnic_115 "Вы можете сами выбрать как будете оплачивать обучение, но при заключении договора вы сразу оплачиваете минимально первый семестр обучения. Это можно сделать: С помощью квитанции через оператора банка, через терминал, с помощью системы онлайн-оплаты, с квитанцией в самом банке."
         sotrudnic_115 "Оплатить обучение возможно материнским капиталом. В данном случае заключается дополнительное соглашение на оплату по мат. Капиталу. Для этого надо иметь при себе оригинал сертификата. После заключения выдаются бумаги для пенсионного фонда. Важно! Им можно оплатить как всю сумму, так и часть. Данные средства идут долго, месяц-два."
         sotrudnic_115 "После заключения договора, чек об оплате обучения за 1 семестр необходимо выслать на электронную почту приемной комиссии: KIPFINpriemka@fa.ru"
@@ -509,7 +524,7 @@ label kabinet_115:
         menu choice_attectat:
             sotrudnic_115 "Вы будете оставлять оригинал или копию аттестата? Если вы решите поступать в наш колледж на бюджет, то до конца работы приёмной комиссии нужно будет привезти и сдать оригинал, если на платную основу – оригинал надо оставить сразу."
             "Оставить копию аттестата":
-                sotrudnic_115 "Не забудьте до конца приемной комиссии оставить оригинал. Будем рады Вас видеть, удачи в поступлении!"
+                sotrudnic_115 " Для зачисления в колледж Вам обязательно нужно будет привезти оригинал аттестата до конца работы Приёмной комиссии. Будем рады Вас видеть, удачи в поступлении!"
             "Оставить оригинал":
                 sotrudnic_115 "Следите за списками на сайте колледжа. Будем рады Вас видеть, удачи в поступлении!"
 
